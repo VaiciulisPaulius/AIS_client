@@ -8,15 +8,6 @@ import { RequireAuth } from 'react-auth-kit'
 function RouteComponent() {
   const [count, setCount] = useState(0)
 
-  useEffect(() => {
-      axios.get("http://localhost:8080/authenticate/login", {
-        params: {
-          username: "Paulius",
-          password: "Vaičiulis"
-        }
-      }).then(res => console.log(res))
-  }, [count])
-
   return (
     <Routes>
         <Route path={'/login'} element={<Login/>}/>

@@ -6,15 +6,6 @@ import RouteComponent from './assets/RouteComponent';
 function App() {
   const [count, setCount] = useState(0)
 
-  useEffect(() => {
-      axios.get("http://localhost:8080/authenticate/login", {
-        params: {
-          username: "Paulius",
-          password: "Vaičiulis"
-        }
-      }).then(res => console.log(res))
-  }, [count])
-
   return (
     <AuthProvider authType = {'cookie'}
                   authName={'_auth'}

@@ -2,3 +2,603 @@ body {
     margin: 0;
     background-color: rgb(200, 200, 200);
 }
+
+/* === Template:Styles/Default.css === */
+
+*,
+*:before,
+*:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* Hide these until the required JavaScript fiddling has been done */
+#actual-form,
+.consider-amounts {
+    display: none;
+}
+
+#actual-form-loading {
+    text-align: center;
+    line-height: 1.2;
+}
+
+.error-nojs {
+    max-width: 300px;
+    color: #d33;
+}
+
+/* Hide default MediaWiki stuff we don't want */
+
+#mw-page-base, #mw-head-base,
+#mw-panel .portal,
+#mw-head, #catlinks,
+#firstHeading, #contentSub, #contentSub2, #siteSub,
+#jump-to-nav, .uls-tipsy {
+    display: none;
+}
+
+/* Re-add gradient background */
+body {
+    background-image: linear-gradient(to bottom, #fff 40px, #f6f6f6 80px);
+    background-position: top;
+    background-repeat: repeat-x;
+    background-color: #f6f6f6;
+}
+
+#content {
+    background-color: transparent;
+    background-image: none;
+    border: 0;
+    padding-top: 32px;
+}
+
+/* Link colors for visibility */
+.mw-parser-output a,
+.mw-parser-output a.external,
+.mw-parser-output a.extiw {
+    color: #36c;
+}
+
+.mw-parser-output a:visited,
+.mw-parser-output a.external:visited,
+.mw-parser-output a.extiw:visited {
+    color: #6f4db3;
+}
+
+.lp-error {
+    color: #d33;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.amount-options .lp-error {
+    margin: 0 4px;
+}
+
+/* Prevent site logos from showing through modals (e.g. for monthly convert) */
+.vector-body {
+    position: inherit;
+}
+
+body.modal-open {
+    overflow: hidden;
+    position: fixed;
+}
+
+/* --- Overall layout of the landing page --- */
+
+#main-wrapper {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+}
+
+body.rtl #main-wrapper {
+    direction: rtl;
+}
+
+#form-wrapper {
+    width: 380px;
+    background-color: #fff;
+    border: 1px solid #a2a9b1;
+    border-radius: 2px;
+    padding: 24px;
+    color: #222;
+}
+
+#appeal-wrapper {
+    flex: 1 0 0;
+}
+
+/* --- Appeal --- */
+
+#appeal {
+    font-size: 16px;
+}
+
+#appeal h2,
+#appeal-head {
+    font-size: 21px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #a2a9b1;
+    margin-bottom: 21px;
+}
+
+.quote-wrapper {
+    padding: 140px 0;
+}
+
+/* --- Hide non-monthly capable payment methods on monthly forms --- */
+
+.form-monthly .not-monthly-capable {
+    display: none;
+}
+
+/* --- Form --- */
+
+#donate-form-wrapper fieldset {
+    width: 100%;
+    border: 0;
+    margin: 0 0 8px 0;
+    padding: 0;
+}
+
+.frequency-options ul,
+.amount-options ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.frequency-options ul li,
+.amount-options ul li {
+    flex: 1 0 0;
+    padding: 4px;
+}
+
+/* --- Subheaders --- */
+
+#radiobuttons-table-header,
+#paymenttype-table-header {
+    display: block;
+    margin-bottom: 6px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* --- Commmon button styles --- */
+
+.frequency-options input[type="radio"],
+.amount-options input[type="radio"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    clip: rect(0 0 0 0);
+}
+
+.frb-btn,
+.payment-method-button {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 50px;
+    padding: 0 4px;
+    border-radius: 2px;
+    font-family: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
+    background-color: #f8f9fa;
+    color: #222;
+    border: 1px solid #a2a9b1;
+}
+
+.frb-btn:hover {
+    background-color: #fff;
+    color: #444;
+    border-color: #a2a9b1;
+}
+
+.frb-btn:active {
+    background-color: #c8ccd1;
+    color: #000;
+    border-color: #72777d;
+    box-shadow: none;
+}
+
+input[type="radio"]:checked + .frb-btn {
+    background-color: #2a4b8d;
+    color: #fff;
+    border-color: #2a4b8d;
+}
+
+.frb-btn:focus,
+.payment-method-button:focus {
+    outline: 0;
+    border-color: #36c;
+    box-shadow: inset 0 0 0 1px #36c;
+}
+
+input[type="radio"]:focus + .frb-btn,
+input[type="radio"]:checked + .frb-btn:focus {
+    box-shadow: inset 0 0 0 1px #36c, inset 0 0 0 2px #fff;
+}
+
+.payment-method-button {
+    color: #36c;
+}
+
+.payment-method-button:hover {
+    background-color: #fff;
+    border-color: #447ff5;
+}
+
+.payment-method-button:active {
+    background-color: #eff3fa;
+    color: #2a4b8d;
+    border-color: #2a4b8d;
+    box-shadow: none;
+}
+
+/* --- Donation Amounts --- */
+
+.amount-options .frb-btn {
+    height: 60px;
+    font-size: 15px;
+    line-height: 1.2;
+    text-align: center;
+}
+
+/* Smaller font size for countries with v long amounts */
+.country-CO .amount-options .frb-btn,
+.country-CR .amount-options .frb-btn,
+.country-KR .amount-options .frb-btn,
+.country-PY .amount-options .frb-btn,
+.country-VN .amount-options .frb-btn {
+    font-size: 13px;
+}
+
+.input_amount_other .frb-btn span {
+    display: block;
+    font-size: 12px;
+    line-height: 1;
+    margin-bottom: 2px;
+    white-space: normal;
+    text-align: center;
+}
+
+.input_amount_other input {
+    display: block;
+    width: 100%;
+    border: 1px solid #a2a9b1;
+    color: #222;
+    padding: 2px;
+    border-radius: 2px;
+    direction: ltr;
+    text-align: center;
+    font-family: inherit;
+    font-size: 16px; /* must be >=16px or mobile Safari zooms in when selected */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0 4px;
+}
+
+/* --- Opt-in and PTF input styles --- */
+
+.lp-radio-wrapper,
+.lp-checkbox-wrapper {
+    display: table;
+}
+
+.lp-radio,
+.lp-checkbox {
+    display: table-cell;
+    vertical-align: top;
+    margin: 7px 8px 8px 2px;
+    cursor: pointer;
+}
+
+body.rtl .lp-radio,
+body.rtl .lp-checkbox {
+    margin: 7px 2px 8px 8px;
+}
+
+.lp-radio-label,
+.lp-checkbox-label {
+    display: table-cell;
+    vertical-align: top;
+    padding: 4px 0;
+    white-space: normal;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.lp-radio-label:hover,
+.lp-radio:focus + .lp-radio-label,
+.lp-radio:hover + .lp-radio-label,
+.lp-checkbox-label:hover,
+.lp-checkbox:focus + .lp-checkbox-label,
+.lp-checkbox:hover + .lp-checkbox-label {
+    color: #36c;
+    text-decoration: none;
+}
+
+/* --- Opt-in --- */
+
+.optin-options {
+    padding: 0 4px !important;
+}
+
+.optin-options legend {
+    padding: 0;
+    font-size: inherit;
+    font-weight: bold;
+}
+
+.optin-options ul {
+    list-style: none;
+    margin: 0;
+}
+
+.optin-options li {
+    display: table;
+}
+
+.optin-smallprint {
+    clear: both;
+    font-size: 12px;
+    line-height: 14px;
+    margin-top: 8px;
+}
+
+.optin-no-prompt {
+    display: none;
+    margin: 0;
+    padding: 6px;
+    border: 2px solid #900;
+    border-radius: 2px;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: normal;
+}
+
+.optin-no-prompt.is-positive {
+    border-color: #14866d;
+    font-weight: bold;
+}
+
+.optin-no-prompt__yes { display: none; }
+.optin-no-prompt__no  { display: block; }
+
+.optin-no-prompt.is-positive .optin-no-prompt__yes { display: block; }
+.optin-no-prompt.is-positive .optin-no-prompt__no  { display: none; }
+
+/* --- PTF --- */
+.ptf {
+    display: none;
+    padding: 0 4px;
+}
+
+/* --- Payment method buttons --- */
+
+.payment-method-div {
+    padding: 4px 4px;
+}
+
+/* Hide extra empty <p> tags between buttons */
+.payment-method-div ~ p {
+    display: none;
+}
+
+.payment-method-button {
+    margin: 0;
+    width: 100%;
+    font-size: 15px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    overflow: hidden;
+}
+
+/* --- Infobox ("Where your donation goes") --- */
+
+#infobox-wrapper {
+    font-size: 13px;
+    line-height: 1.4;
+    color: #54595d;
+    font-weight: normal;
+    padding: 8px 4px 0 4px;
+}
+
+#infobox-wrapper h2 {
+    font-size: 16px;
+    font-weight: bold;
+    color: inherit;
+    border: 0;
+    margin-bottom: 8px;
+}
+
+/* --- Privacy and links --- */
+
+#donate-footer {
+    width: 100%;
+    text-align: center;
+    line-height: 1.4;
+    padding: 24px 15% 8px;
+}
+
+#donate-footer > div {
+    margin-bottom: 16px;
+}
+
+.donate-smallprint,
+#donor-policy-block {
+    font-size: 12px;
+}
+
+.form-info-links,
+.form-info-links ul {
+    list-style: none;
+    margin: 0;
+    text-align: center;
+}
+
+.form-info-links li {
+    display: inline-block;
+}
+
+.form-info-links a.external {
+    padding: 14px !important;
+}
+
+/* --- Footer --- */
+
+.mw-footer {
+    display: none;
+}
+
+.payment-method-button svg {
+    margin: 0 4px;
+}
+
+/* Credit card logos.
+ * Classes are added by https://donate.wikimedia.org/wiki/MediaWiki:DonationForm.js ---
+ */
+.paymentmethod-cc svg {
+    display: none;
+    height: 26px;
+    border: 1px solid #c8ccd1;
+    border-radius: 4px;
+}
+
+.cctypes-vmad,
+.cctypes-vmaj,
+.cctypes-vmj,
+.cctypes-vma,
+.cctypes-vm,
+.cctypes-CBvma,
+.cctypes-vmar {
+    font-size: 0; /* Remove spacing between icons */
+}
+
+.cctypes-vmad  .cc-logo-visa,
+.cctypes-vmad  .cc-logo-mastercard,
+.cctypes-vmad  .cc-logo-amex,
+.cctypes-vmad  .cc-logo-discover,
+
+.cctypes-vmaj  .cc-logo-visa,
+.cctypes-vmaj  .cc-logo-mastercard,
+.cctypes-vmaj  .cc-logo-amex,
+.cctypes-vmaj  .cc-logo-jcb,
+
+.cctypes-vmj   .cc-logo-visa,
+.cctypes-vmj   .cc-logo-mastercard,
+.cctypes-vmj   .cc-logo-jcb,
+
+.cctypes-vma   .cc-logo-visa,
+.cctypes-vma   .cc-logo-mastercard,
+.cctypes-vma   .cc-logo-amex,
+
+.cctypes-vm    .cc-logo-visa,
+.cctypes-vm    .cc-logo-mastercard,
+
+.cctypes-CBvma .cc-logo-CB,
+.cctypes-CBvma .cc-logo-visa,
+.cctypes-CBvma .cc-logo-mastercard,
+.cctypes-CBvma .cc-logo-amex,
+
+.cctypes-vmar .cc-logo-visa,
+.cctypes-vmar .cc-logo-mastercard,
+.cctypes-vmar .cc-logo-amex,
+.cctypes-vmar .cc-logo-rupay {
+    display: inline-block !important;
+}
+
+.paymentmethod-cc .cc-logo-rupay {
+    border: 0;
+}
+
+/* Logos - WP on top, WMF horizontal below */
+#p-logo a {
+    /* Need explicit height for backgrounds for IE */
+    background: top 30% center/160px 24px url(https://donate.wikimedia.org/static/images/mobile/copyright/wikipedia-wordmark-en.svg), top 70% center/160px 37px url(https://upload.wikimedia.org/wikipedia/donate/6/60/Wmf_logo_horiz_K.svg);
+    background-repeat: no-repeat;
+    margin-left: 8px;
+}
+
+/* Mobile styles */
+@media (max-width: 981px) {
+    
+    /* Text & Logo layout */
+    #content {
+        margin: 0;
+        padding: 140px 24px 24px 24px;
+    }
+
+    #mw-panel, #p-logo, #p-logo a {
+        width: 100% !important;
+        height: 140px;
+        margin: 0;
+    }
+
+    #p-logo a {
+        margin-left: 0;
+    }
+
+    /* Hide appeal */
+    #appeal-wrapper {
+        display: none;
+    }
+
+    #form-wrapper {
+        padding: 16px;
+    }
+
+    /* Smallprint and links */
+    #donate-footer {
+        margin: 24px 0 0 0;
+        padding: 0;
+    }
+
+    /* Footer */
+    div#footer {
+        margin: 0;
+    }
+}
+
+@media (max-width: 721px) {
+    /* Stack appeal and form */
+    #appeal-wrapper {
+        flex-basis: 100%;
+        padding: 0;
+    }
+}
+
+@media (max-width: 501px) {
+    /* Appeal same width as form */
+    #appeal-wrapper {
+        max-width: 380px;
+        padding: 0;
+    }
+
+    #content {
+        padding: 140px 8px 8px 8px;
+    }
+
+}
+
+/* === end of Template:Styles/Default.css === */
